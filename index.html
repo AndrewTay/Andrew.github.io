@@ -1,0 +1,166 @@
+import React, { useState, useEffect } from 'react';
+import { Menu, X, ArrowRight, Github, Linkedin, Twitter, Moon, Sun } from 'lucide-react';
+
+// CSS Variables wrapper component
+const ThemeProvider = ({ children }) => {
+  const [theme, setTheme] = useState('light');
+
+  const toggleTheme = () => {
+    setTheme(current => current === 'light' ? 'dark' : 'light');
+  };
+
+  return (
+    <div className={`${theme} transition-colors duration-300`}>
+      <button
+        onClick={toggleTheme}
+        className="fixed bottom-8 right-8 p-4 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-lg hover:shadow-xl transition-all duration-300 z-50"
+        aria-label="Toggle theme"
+      >
+        {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
+      </button>
+      {children}
+    </div>
+  );
+};
+
+const App = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = (window.scrollY / totalScroll) * 100;
+      setScrollProgress(progress);
+      setIsScrolled(window.scrollY > 100);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  return (
+    <ThemeProvider>
+      <div className="min-h-screen bg-white dark:bg-slate-900 transition-colors duration-300">
+        {/* Progress Bar */}
+        <div className="fixed top-0 left-0 w-full h-1 bg-transparent z-50">
+          <div 
+            className="h-full bg-blue-600 transition-all duration-300"
+            style={{ width: `${scrollProgress}%` }}
+          />
+        </div>
+
+        {/* Navigation */}
+        <header className={`fixed top-0 left-0 right-0 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md z-40 transition-all duration-300 ${
+          isScrolled ? 'py-4 shadow-lg' : 'py-6'
+        }`}>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <nav className="flex items-center justify-between">
+              <a href="#" className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">
+                AT
+              </a>
+              
+              {/* Desktop Navigation */}
+              <div className="hidden md:flex space-x-8">
+                {['About', 'Experience', 'Insights', 'Contact'].map((item) => (
+                  <a
+                    key={item}
+                    href={`#${item.toLowerCase()}`}
+                    className="relative text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium transition-colors duration-300 group"
+                  >
+                    {item}
+                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 dark:bg-blue-400 transition-all duration-300 group-hover:w-full" />
+                  </a>
+                ))}
+              </div>
+
+              {/* Mobile Menu Button */}
+              <button
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className="md:hidden p-2 text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400"
+              >
+                {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              </button>
+            </nav>
+
+            {/* Mobile Navigation */}
+            {isMenuOpen && (
+              <div className="md:hidden py-4">
+                <div className="flex flex-col space-y-4">
+                  {['About', 'Experience', 'Insights', 'Contact'].map((item) => (
+                    <a
+                      key={item}
+                      href={`#${item.toLowerCase()}`}
+                      className="text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 font-medium"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      {item}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        </header>
+
+        {/* Hero Section */}
+        <section className="relative min-h-screen flex items-center pt-24 overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-blue-100/50 dark:from-slate-800/50 dark:to-slate-900/50 -skew-y-6 transform-gpu" />
+          
+          <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div className="max-w-3xl">
+              <h1 className="text-5xl sm:text-6xl font-extrabold mb-6 animate-fade-in">
+                <span className="bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">
+                  Building Tomorrow's Financial Technology
+                </span>
+              </h1>
+              <p className="text-xl sm:text-2xl text-slate-600 dark:text-slate-300 mb-8 animate-fade-in-delay">
+                I leverage deep expertise in finance and a passion for technology to build the future. 
+                Through data-driven insights, automation, and a commitment to continuous improvement, 
+                I help organizations thrive in an era of rapid change.
+              </p>
+              <a 
+                href="#experience" 
+                className="inline-flex items-center px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl animate-fade-in-delay-2"
+              >
+                Explore My Work
+                <ArrowRight className="ml-2" size={20} />
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* Social Links */}
+        <div className="fixed bottom-8 left-8 flex space-x-4 z-50">
+          <a 
+            href="https://github.com/AndrewTay" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="p-3 bg-white dark:bg-slate-800 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400"
+          >
+            <Github size={20} />
+          </a>
+          <a 
+            href="https://linkedin.com/in/andrew-tay" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="p-3 bg-white dark:bg-slate-800 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400"
+          >
+            <Linkedin size={20} />
+          </a>
+          <a 
+            href="https://x.com/AndrewTaySG" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="p-3 bg-white dark:bg-slate-800 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400"
+          >
+            <Twitter size={20} />
+          </a>
+        </div>
+      </div>
+    </ThemeProvider>
+  );
+};
+
+export default App;
