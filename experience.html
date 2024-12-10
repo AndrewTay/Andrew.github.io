@@ -3,264 +3,446 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Andrew Tay's professional experience in financial technology, automation, and strategic consulting. Learn about key projects and achievements.">
-    <meta name="keywords" content="Andrew Tay Experience, KYC Solutions, Enterprise Automation, AI Implementation, Financial Technology">
-    <title>Experience | Andrew Tay</title>
+    <meta name="description" content="Andrew Tay - Senior Technical Consultant & Implementation Specialist pioneering enterprise automation and digital transformation solutions in Singapore">
+    <meta name="keywords" content="Andrew Tay, Technical Consultant, Implementation Specialist, Enterprise Automation, Digital Transformation, Cloud Infrastructure, Singapore, KYC Solutions, Workflow Automation">
+    <meta name="author" content="Andrew Tay">
+    <meta property="og:title" content="Andrew Tay | Technical Innovation & Strategy">
+    <meta property="og:description" content="Pioneering enterprise automation and digital transformation solutions with expertise in cloud infrastructure and identity verification">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#2563eb">
+    <meta name="robots" content="index, follow">
+    
+    <title>Andrew Tay | Technical Innovation & Strategy</title>
+    
+    <!-- Preload critical resources -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <style>
-        /* Experience Page Specific Styles */
-        .timeline-container {
-            position: relative;
-            padding: 2rem 0;
+        /* Base Variables */
+        :root {
+            --primary: #2563eb;
+            --primary-rgb: 37, 99, 235;
+            --primary-dark: #1d4ed8;
+            --background: #ffffff;
+            --background-alt: #f8fafc;
+            --text: #1f2937;
+            --text-light: #6b7280;
+            --accent: #3b82f6;
+            --border: #e2e8f0;
+            --transition-standard: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
         }
 
-        .timeline-line {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 2px;
-            height: 100%;
-            background: var(--primary);
-            opacity: 0.3;
+        /* Dark Theme Variables */
+        [data-theme="dark"] {
+            --background: #0f172a;
+            --background-alt: #1e293b;
+            --text: #f3f4f6;
+            --text-light: #9ca3af;
+            --border: #2d3748;
         }
 
-        .timeline-block {
-            display: flex;
-            margin: 2rem 0;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.6s ease;
+        /* Reset & Base Styles */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        .timeline-block.animate-in {
-            opacity: 1;
-            transform: translateY(0);
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+            -webkit-text-size-adjust: 100%;
+            scroll-padding-top: 5rem;
         }
 
-        .timeline-block:nth-child(odd) {
-            flex-direction: row-reverse;
-        }
-
-        .timeline-content {
-            width: 45%;
-            padding: 2rem;
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background: var(--background);
-            border: 1px solid rgba(var(--primary-rgb), 0.1);
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: var(--transition-standard);
+            min-height: 100vh;
+            text-rendering: optimizeLegibility;
+            -webkit-font-smoothing: antialiased;
         }
 
-        .timeline-content:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+        /* Header & Navigation */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(var(--background-rgb), 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            transition: var(--transition-standard);
         }
 
-        .timeline-date {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--primary);
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 4rem;
+            padding: 0 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .nav-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary);
+            text-decoration: none;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--text);
+            text-decoration: none;
             font-weight: 500;
+            transition: var(--transition-standard);
+            position: relative;
+            padding: 0.5rem;
         }
 
-        .project-grid {
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition-standard);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 8rem 0 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, 
+                rgba(var(--primary-rgb), 0.1) 0%,
+                rgba(var(--primary-rgb), 0.05) 50%,
+                rgba(var(--primary-rgb), 0.02) 100%);
+            transform: skewY(-6deg);
+            transform-origin: top left;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            opacity: 0;
+            animation: slideUp 1s ease-out forwards;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.25rem, 3vw, 1.5rem);
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: slideUp 1s ease-out 0.2s forwards;
+        }
+
+        .hero-text {
+            font-size: 1.125rem;
+            color: var(--text-light);
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            opacity: 0;
+            animation: slideUp 1s ease-out 0.4s forwards;
+        }
+
+        /* Expertise Section */
+        .expertise-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
             margin-top: 4rem;
+            opacity: 0;
+            animation: slideUp 1s ease-out 0.6s forwards;
         }
 
-        .project-card {
-            background: var(--background);
-            border-radius: 8px;
+        .expertise-card {
+            background: var(--background-alt);
             padding: 2rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            border: 1px solid rgba(var(--primary-rgb), 0.1);
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            transition: var(--transition-standard);
+            position: relative;
+            overflow: hidden;
         }
 
-        .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+        .expertise-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            opacity: 0;
+            transition: var(--transition-standard);
+            z-index: 0;
         }
 
-        .project-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 1rem;
+        .expertise-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
         }
 
-        .project-tag {
-            background: rgba(var(--primary-rgb), 0.1);
+        .expertise-card:hover::before {
+            opacity: 0.05;
+        }
+
+        .expertise-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .expertise-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
             color: var(--primary);
-            padding: 0.25rem 0.75rem;
-            border-radius: 15px;
-            font-size: 0.875rem;
         }
 
+        .expertise-text {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Social Links */
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 3rem;
+            opacity: 0;
+            animation: slideUp 1s ease-out 0.8s forwards;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.875rem 1.5rem;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: var(--transition-standard);
+        }
+
+        .social-link:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .social-link svg {
+            width: 20px;
+            height: 20px;
+            transition: var(--transition-standard);
+        }
+
+        .social-link:hover svg {
+            transform: translateX(4px);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            background: var(--background);
+            border: 1px solid var(--border);
+            color: var(--text);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition-standard);
+            z-index: 100;
+            box-shadow: var(--shadow);
+        }
+
+        .theme-toggle:hover {
+            transform: rotate(180deg);
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Media Queries */
         @media (max-width: 768px) {
-            .timeline-line {
-                left: 2rem;
+            .nav {
+                padding: 0 1rem;
             }
 
-            .timeline-block {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .hero {
+                padding-top: 6rem;
+            }
+
+            .expertise-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .social-links {
                 flex-direction: column;
-                margin-left: 4rem;
             }
 
-            .timeline-block:nth-child(odd) {
-                flex-direction: column;
+            .theme-toggle {
+                bottom: 1rem;
+                right: 1rem;
             }
+        }
 
-            .timeline-content {
-                width: 100%;
+        /* Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
             }
+        }
 
-            .timeline-date {
-                left: 2rem;
-                transform: none;
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* Print Styles */
+        @media print {
+            .header,
+            .theme-toggle,
+            .social-links {
+                display: none;
             }
         }
     </style>
 </head>
 <body>
-    <div class="nav-progress">
-        <div class="progress-bar"></div>
-    </div>
-
     <header class="header">
-        <div class="container">
-            <nav class="nav">
-                <a href="index.html" class="logo">AT</a>
-                <div class="nav-links">
-                    <a href="about.html" class="nav-link">About</a>
-                    <a href="experience.html" class="nav-link active">Experience</a>
-                </div>
-            </nav>
-        </div>
     </header>
 
     <main>
-        <section class="experience-hero">
+        <section class="hero" id="home">
             <div class="container">
                 <div class="hero-content">
-                    <h1 class="hero-title">Strategic Experience</h1>
-                    <p class="hero-subtitle">
-                        My career has been a journey of continuous learning and impact,
-                        navigating the dynamic interplay of finance, technology, and regulatory
-                        landscapes. I've had the privilege of driving transformative
-                        initiatives, from architecting robust automation solutions to delivering
-                        strategic insights that empower clients to achieve their objectives in a
-                        rapidly evolving digital world.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <section class="timeline-section">
-            <div class="container">
-                <h2>Roles & Key Contributions</h2>
-                <div class="timeline-container">
-                    <div class="timeline-line"></div>
+                    <h1 class="hero-title">Innovating Through Technology</h1>
+                    <p class="hero-subtitle">Technical Strategy & Enterprise Solutions</p>
+                    <p class="hero-text">Senior Technical Consultant and Implementation Specialist with expertise in enterprise automation, identity verification, and digital transformation. Focused on creating scalable solutions that drive business growth.</p>
                     
-                    <div class="timeline-block">
-                        <div class="timeline-date">2023 - Present</div>
-                        <div class="timeline-content">
-                            <h3>Implementation Specialist, Trulioo (APAC)</h3>
-                            <p>Orchestrated the integration of sophisticated global identity verification workflows for enterprise clients across the APAC region.</p>
-                            <div class="project-tags">
-                                <span class="project-tag">KYC/KYB Solutions</span>
-                                <span class="project-tag">Enterprise Integration</span>
-                                <span class="project-tag">Strategic Advisory</span>
+                    <div class="expertise-grid" id="expertise">
+                        <div class="expertise-card">
+                            <div class="expertise-content">
+                                <h3 class="expertise-title">Enterprise Integration</h3>
+                                <p class="expertise-text">Specializing in API-based integrations and workflow automation across HR, Finance, and IT functions. Expert in DevSecOps practices and modern CI/CD implementation.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="expertise-card">
+                            <div class="expertise-content">
+                                <h3 class="expertise-title">Identity Solutions</h3>
+                                <p class="expertise-text">Implementation specialist for global KYC/KYB solutions, focusing on seamless API and SDK integrations. Leading initiatives in user journey optimization and product development.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="expertise-card">
+                            <div class="expertise-content">
+                                <h3 class="expertise-title">Cloud Architecture</h3>
+                                <p class="expertise-text">AWS and GCP certified professional with extensive experience in cloud infrastructure design and implementation. Focus on scalable, secure, and efficient solutions.</p>
                             </div>
                         </div>
                     </div>
 
-                    <div class="timeline-block">
-                        <div class="timeline-date">2021 - 2023</div>
-                        <div class="timeline-content">
-                            <h3>Senior Technical Consultant, Workato</h3>
-                            <p>Led the development and implementation of complex automation solutions using Workato's enterprise integration platform.</p>
-                            <div class="project-tags">
-                                <span class="project-tag">Enterprise Automation</span>
-                                <span class="project-tag">iPaaS</span>
-                                <span class="project-tag">DevSecOps</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="key-projects">
-            <div class="container">
-                <h2>Impactful Projects & Initiatives</h2>
-                <div class="project-grid">
-                    <div class="project-card">
-                        <h3>Global KYC Automation at Scale</h3>
-                        <p>Led the design and implementation of a robust, scalable identity verification workflow that reduced client onboarding time by 30% while ensuring strict adherence to global regulatory standards.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">Identity Verification</span>
-                            <span class="project-tag">Regulatory Compliance</span>
-                            <span class="project-tag">Process Optimization</span>
-                        </div>
-                    </div>
-
-                    <div class="project-card">
-                        <h3>AI-Powered Customer Engagement</h3>
-                        <p>Conceptualized and deployed intelligent chatbots that automated critical support functions, reduced operational costs, and demonstrably improved response times.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">AI Implementation</span>
-                            <span class="project-tag">Customer Support</span>
-                            <span class="project-tag">Process Automation</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="container">
-            <p>© 2024 Andrew Tay. All Rights Reserved.</p>
-            <div class="social-links">
-                <a href="https://x.com/AndrewTaySG" target="_blank" rel="noopener noreferrer">X</a>
-                <a href="https://www.linkedin.com/in/andrew-tay/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-                <a href="https://github.com/AndrewTay" target="_blank" rel="noopener noreferrer">GitHub</a>
-            </div>
-        </div>
-    </footer>
-
-    <button class="theme-toggle" aria-label="Toggle theme">🌓</button>
-
-    <script src="script.js"></script>
-    <script>
-        // Timeline animation
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.1
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animate-in');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.timeline-block').forEach(block => {
-            observer.observe(block);
-        });
-    </script>
-</body>
-</html>
+                    <div class="social-links" id="contact">
+                        <a href="https://linkedin.com/in/andrew-tay" class="social-link" target="_blank" rel="noopener noreferrer">
+                            Connect on LinkedIn
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0
