@@ -1,0 +1,120 @@
+import React from 'react';
+import { Code, Cloud, LineChart, Shield, Download } from 'lucide-react';
+
+const AboutSection = () => {
+  const skills = [
+    {
+      category: "Finance & Economics",
+      icon: <LineChart className="w-6 h-6" />,
+      items: ["Market Analysis", "Risk Assessment", "Investment Strategy", "Economic Modeling"]
+    },
+    {
+      category: "Cloud & Infrastructure",
+      icon: <Cloud className="w-6 h-6" />,
+      items: ["CI/CD Pipelines", "Cloud Architecture", "Infrastructure Automation", "DevOps Practices"]
+    },
+    {
+      category: "Development & Integration",
+      icon: <Code className="w-6 h-6" />,
+      items: ["API Integration", "Workflow Automation", "System Architecture", "Technical Documentation"]
+    },
+    {
+      category: "Compliance & Security",
+      icon: <Shield className="w-6 h-6" />,
+      items: ["KYC/KYB Implementation", "Regulatory Compliance", "Risk Management", "Security Frameworks"]
+    }
+  ];
+
+  return (
+    <section id="about" className="py-24 bg-white dark:bg-slate-900">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Hero Section */}
+        <div className="max-w-3xl mx-auto text-center mb-16">
+          <h2 className="text-4xl font-bold text-slate-900 dark:text-white mb-6">
+            About Me
+          </h2>
+          <p className="text-lg text-slate-600 dark:text-slate-300">
+            My journey spans the worlds of finance, economics, startup ecosystems, and cutting-edge technology. 
+            I combine macro-level strategic thinking with deep technical expertise to help organizations 
+            scale and innovate in the next digital frontier.
+          </p>
+        </div>
+
+        {/* Background Section */}
+        <div className="mb-20">
+          <div className="bg-slate-50 dark:bg-slate-800 rounded-2xl p-8 shadow-lg">
+            <h3 className="text-2xl font-semibold text-slate-900 dark:text-white mb-6">
+              Background
+            </h3>
+            <div className="prose prose-lg dark:prose-invert max-w-none">
+              <p className="text-slate-600 dark:text-slate-300">
+                As a Singapore-based financial analyst, I delve into both macro and microeconomic factors 
+                shaping global markets. My experience includes working with top-tier organizations to 
+                implement workflow automation, identity verification solutions, and cloud infrastructure 
+                optimizations.
+              </p>
+              <p className="text-slate-600 dark:text-slate-300 mt-4">
+                Through these initiatives, I have gained hands-on insights into how technology can 
+                streamline processes, mitigate risk, and unlock new avenues of growth. I'm passionate 
+                about bridging the gap between data-driven decision-making and impactful innovation.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Skills Grid */}
+        <div className="mb-20">
+          <h3 className="text-2xl font-semibold text-slate-900 dark:text-white mb-8">
+            Skills & Expertise
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {skills.map((skill, index) => (
+              <div 
+                key={index}
+                className="bg-white dark:bg-slate-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300"
+              >
+                <div className="flex items-center mb-4">
+                  <div className="p-2 bg-blue-100 dark:bg-blue-900 rounded-lg">
+                    {skill.icon}
+                  </div>
+                  <h4 className="ml-4 text-xl font-semibold text-slate-900 dark:text-white">
+                    {skill.category}
+                  </h4>
+                </div>
+                <ul className="space-y-2">
+                  {skill.items.map((item, itemIndex) => (
+                    <li 
+                      key={itemIndex}
+                      className="flex items-center text-slate-600 dark:text-slate-300"
+                    >
+                      <span className="w-2 h-2 bg-blue-500 rounded-full mr-3"></span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Resume Download */}
+        <div className="text-center">
+          <a
+            href="https://drive.google.com/file/d/13VmHh69bV6ojWFmCKpP2Q_suUU8jS7rV/view?usp=sharing"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl"
+          >
+            <Download className="mr-2 w-5 h-5" />
+            Download Resume
+          </a>
+          <p className="mt-4 text-sm text-slate-500 dark:text-slate-400">
+            For a more detailed overview of my professional experience
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default AboutSection;
